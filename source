@@ -9,14 +9,6 @@ local cloneref = cloneref or function(o) return o end
 COREGUI = cloneref(game:GetService("CoreGui"))
 Players = cloneref(game:GetService("Players"))
 
-if not game:IsLoaded() then
-	local notLoaded = Instance.new("Message")
-	notLoaded.Parent = COREGUI
-	notLoaded.Text = 'Infinite Yield is waiting for the game to load'
-	game.Loaded:Wait()
-	notLoaded:Destroy()
-end
-
 currentVersion = '5.9.4'
 
 Holder = Instance.new("Frame")
@@ -161,26 +153,10 @@ function randomString()
 end
 
 PARENT = nil
-if get_hidden_gui or gethui then
-	local hiddenUI = get_hidden_gui or gethui
-	local Main = Instance.new("ScreenGui")
-	Main.Name = randomString()
-	Main.Parent = hiddenUI()
-	PARENT = Main
-elseif (not is_sirhurt_closure) and (syn and syn.protect_gui) then
-	local Main = Instance.new("ScreenGui")
-	Main.Name = randomString()
-	syn.protect_gui(Main)
-	Main.Parent = COREGUI
-	PARENT = Main
-elseif COREGUI:FindFirstChild('RobloxGui') then
-	PARENT = COREGUI.RobloxGui
-else
-	local Main = Instance.new("ScreenGui")
-	Main.Name = randomString()
-	Main.Parent = COREGUI
-	PARENT = Main
-end
+local Main = Instance.new("ScreenGui")
+Main.Name = randomString()
+Main.Parent = COREGUI
+PARENT = Main
 
 shade1 = {}
 shade2 = {}
